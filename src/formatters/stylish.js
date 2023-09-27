@@ -17,22 +17,21 @@ const stringify = (val, depth) => {
 const stylish = (tree) => {
   const iter = (node, depth) => {
     const result = node.flatMap((elem) => {
-      if (elem.type === 'added') {
-        return `${indent(depth)}+ ${elem.key}: ${stringify(elem.value, depth + 1)}`;
+      switch (elem.type) {
+        case 'added':
+          return `${indent(depth)}+ ${elem.key}: ${stringify(elem.value, depth + 1)}`;
+        case 'deleted':
+          return `${indent(depth)}- ${elem.key}: ${stringify(elem.value, depth + 1)}`;
+        case 'changed':
+          return [
+            `${indent(depth)}- ${elem.key}: ${stringify(elem.value1, depth + 1)}`,
+            `${indent(depth)}+ ${elem.key}: ${stringify(elem.value2, depth + 1)}`,
+          ];
+        case 'nested':
+          return `${indent(depth)}  ${elem.key}: {\n${iter(elem.children, depth + 1).join('\n')}\n${indent(depth)}  }`;
+        default:
+          return `${indent(depth)}  ${elem.key}: ${stringify(elem.value, depth + 1)}`;
       }
-      if (elem.type === 'deleted') {
-        return `${indent(depth)}- ${elem.key}: ${stringify(elem.value, depth + 1)}`;
-      }
-      if (elem.type === 'changed') {
-        return [
-          `${indent(depth)}- ${elem.key}: ${stringify(elem.value1, depth + 1)}`,
-          `${indent(depth)}+ ${elem.key}: ${stringify(elem.value2, depth + 1)}`,
-        ];
-      }
-      if (elem.type === 'nested') {
-        return `${indent(depth)}  ${elem.key}: {\n${iter(elem.children, depth + 1).join('\n')}\n${indent(depth)}  }`;
-      }
-      return `${indent(depth)}  ${elem.key}: ${stringify(elem.value, depth + 1)}`;
     });
     return result;
   };
