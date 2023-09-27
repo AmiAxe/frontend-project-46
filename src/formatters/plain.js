@@ -22,6 +22,8 @@ const plain = (tree) => {
           return `Property '${path}${elem.key}' was updated. From ${stringify(elem.value1)} to ${stringify(elem.value2)}`;
         case 'nested':
           return iter(elem.children, `${path}${elem.key}.`);
+        case 'unchanged':
+          return [];
         default:
           return [];
       }
