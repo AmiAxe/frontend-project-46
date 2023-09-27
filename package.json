@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npx jest"
   },
-  "description": "[![Actions Status](https://github.com/AmiAxe/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/AmiAxe/frontend-project-46/actions)",
+  "description": "GenDiff App - compares two configuration files and shows a difference",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AmiAxe/frontend-project-46.git"
