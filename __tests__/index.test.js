@@ -18,3 +18,7 @@ test.each([
   expect(genDiff(getFixturePath(`file1.${format}`), getFixturePath(`file2.${format}`), 'plain')).toEqual(expectedUnswerPlain);
   expect(genDiff(getFixturePath(`file1.${format}`), getFixturePath(`file2.${format}`), 'json')).toEqual(expectedUnswerJson);
 });
+
+test('genDiff without format type', () => {
+  expect(() => genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toThrowError('Invalid format type');
+});
