@@ -20,5 +20,5 @@ test.each([
 });
 
 test('genDiff without format type', () => {
-  expect(() => genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toThrowError('Invalid format type');
+  expect(() => genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toThrow('Invalid format type');
 });
